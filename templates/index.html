@@ -2,75 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Aquarium Simulator</title>
+    <title>Aquarium</title>
     <style>
       #aquarium {
-        height: 60vh; /* Height is set to 60% of the viewport height */
-        border: 2px solid #01579b;
-        position: relative;
-        overflow: hidden;
-        background-image: url({{url_for("static", filename= "background.png")}});
-      }
-      .fish {
-        position: absolute;
-      }
-      .flip-horizontal {
-        transform: scaleX(-1);
-      }
-      #aquarium {
-        margin: 10px auto;
-        display: block;
+        background-image: url("{{url_for('static', filename='assets/background.png')}}");
       }
     </style>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/index.css')}}"
+    />
   </head>
   <body>
-    <div id="aquarium"></div>
-
-    <script>
-      const aquarium = document.getElementById("aquarium");
-
-      function createFishElement(fish, aquariumWidth, aquariumHeight) {
-        const fishElement = document.createElement("div");
-        fishElement.className = "fish";
-        fishElement.style.left = `${fish.position.x * aquariumWidth}px`;
-        fishElement.style.top = `${fish.position.y * aquariumHeight}px`;
-        const s = Math.min(aquariumWidth, aquariumHeight);
-        const fishSize = s * (s > 500 ? 0.4 : 0.2);
-        fishElement.style.width = `${fishSize}px`;
-        fishElement.style.height = `${fishSize}px`;
-
-        const shouldFlip = fish.position.x > fish.last_position_x;
-        if (shouldFlip) {
-          fishElement.classList.add("flip-horizontal");
-        } else {
-          fishElement.classList.remove("flip-horizontal");
-        }
-
-        fishElement.innerHTML = `<img src="{{ url_for('static', filename='shark.svg') }}" alt="Fish Image" style="width: 100%; height: 100%;">`;
-
-        return fishElement;
-      }
-
-      function updateAquarium() {
-        fetch("/status")
-          .then((response) => response.json())
-          .then((data) => {
-            const width = aquarium.clientWidth;
-            const height = aquarium.clientHeight;
-
-            aquarium.innerHTML = "";
-
-            data.forEach((fish) => {
-              const fishElement = createFishElement(fish, width, height);
-              aquarium.appendChild(fishElement);
-            });
-          })
-          .catch((error) => console.error("Error:", error));
-      }
-
-      updateAquarium();
-      setInterval(updateAquarium, 3000);
-      window.onresize = updateAquarium;
-    </script>
+    <div id="aquarium" role="region" aria-label="Aquarium" tabindex="0"></div>
+    <script
+      type="application/javascript"
+      src="{{url_for('static', filename='js/index.js')}}"
+    ></script>
   </body>
 </html>

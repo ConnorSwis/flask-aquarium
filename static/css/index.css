@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+#aquarium {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+.fish {
+  position: absolute;
+  transition: left 5.9s linear, top 5.9s linear;
+  text-align: center;
+  font-size: 12px;
+}
+
+.fish img {
+  width: 100%;
+  height: auto;
+}
+
+.fish img.flip-horizontal {
+  transform: scaleX(-1);
+}
+
+.fish-name {
+  display: block;
+  color: white;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  max-width: calc(100% - 12px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: medium;
+}
